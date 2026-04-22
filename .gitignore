@@ -1,4 +1,5 @@
 .gradle
+.gigaide
 .idea
 build/
 !gradle/wrapper/gradle-wrapper.jar

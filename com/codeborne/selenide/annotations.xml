@@ -1,0 +1,5 @@
+<root>
+    <item name='com.codeborne.selenide.Configuration browserVersion'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
