@@ -7,8 +7,9 @@ import com.codeborne.selenide.conditions.Visible;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.allOf;
-import static com.codeborne.selenide.Condition.text;
+import java.io.File;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class toolsQa {
@@ -17,25 +18,42 @@ public class toolsQa {
         Configuration.baseUrl = "https://demoqa.com";
 
     }
-    String name = "Piskareva";
+    String fname = "Misha";
+    String lname = "Piskareva";
     String email = "Piskareva@mail.sru";
-    String cadress = "Pomoika GA";
-    String padress = "Pomoika GA, dom 1";
+    int number = 1233123412;
+    String subjects = "English";
+    String cadress = "Pomoika GA, dom 1";
     @Test
     void toolsQa (){
-        open("/text-box");
-        $("#userName").setValue(name);
+        open("/automation-practice-form");
+        $("#firstName").setValue(fname);
+        $("#lastName").setValue(lname);
         $("#userEmail").setValue(email);
+        $("#gender-radio-1").click();
+        $("#userNumber").setValue(String.valueOf(number));
+        $("#subjectsInput").click();
+        $("#subjectsInput").setValue(subjects);
+        $("#subjectsInput").pressEnter();
+        $("#hobbies-checkbox-3").click();
+        $("#uploadPicture").uploadFile(new File("/Users/andrejsmirnov/Downloads/89vPCBqmTjdADHb7gE5QXT7vyaHEf28DYS4zmRQ8AxMf79836rzMjcHEgzJh2TlkmgRaA5ish-0EHYlfddeQZJlW.jpg"));
         $("#currentAddress").setValue(cadress);
-        $("#permanentAddress").setValue(padress);
+        $("#state").scrollIntoView("{behavior: 'instant', block: 'center'}").click();
+        $("#react-select-3-option-3").click();
+        $("#city").click();
+        $("#react-select-4-option-1").click();
         $("#submit").click();
-        $("#output").shouldHave(allOf(
-                text(name),
+        $("#example-modal-sizes-title-lg").shouldHave(visible);
+        $(".modal-body").shouldHave(allOf(
+                text(fname),
+                text(lname),
                 text(email),
+                text(String.valueOf(number)),
+                text(subjects),
+                text("89vPCBqmTjdADHb7gE5QXT7vyaHEf28DYS4zmRQ8AxMf79836rzMjcHEgzJh2TlkmgRaA5ish-0EHYlfddeQZJlW.jpg"),
                 text(cadress),
-                text(padress)
-        ));
-        sleep(5000);
+                text("Rajasthan Jaiselmer")));
+
 
 
     }
